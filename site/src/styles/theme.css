@@ -1,0 +1,7 @@
+/* 基础主题定义 */
+@layer base {
+  :root {
+    --theme-primary: rgba(255, 103, 71, 1); /* 主色 */
+    --theme-secondary: rgba(255, 201, 151, 1); /* 次色 */
+  }
+}

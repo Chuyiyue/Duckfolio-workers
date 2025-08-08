@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+@import './theme.css';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 15s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-neutral-200 dark:border-neutral-800 outline-blue-500/50;
+  }
+  body {
+    @apply bg-white dark:bg-black;
+  }
+}
+
+/* 文字选择 */
+::selection {
+  @apply bg-[var(--theme-primary)]/20 text-[var(--theme-primary)];
+}
+
+/* 用于主题切换 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 1;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 999;
+}
+
+:root:not(.dark)::view-transition-old(root) {
+  z-index: 999;
+}
+
+:root:not(.dark)::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* 在主题切换期间优化动画性能 */
+.theme-transitioning * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* 自定义光标样式 */
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  width: 8px;
+  height: 8px;
+  background-color: var(--theme-primary);
+  border-radius: 50%;
+  will-change: transform;
+  filter: drop-shadow(0 0 4px var(--theme-primary, 0.5));
+}
+
+.cursor-ring {
+  position: fixed;
+  z-index: 9998;
+  pointer-events: none;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--theme-primary);
+  border-radius: 50%;
+  will-change: transform;
+  transition: opacity 200ms ease;
+}
+
+.dark .cursor-dot {
+  background-color: var(--theme-secondary);
+}
+
+.dark .cursor-ring {
+  border-color: var(--theme-secondary);
+}
+
+/* 手机和平板设备不显示自定义光标 */
+@media (max-width: 768px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+  .custom-cursor,
+  .custom-cursor * {
+    cursor: auto !important;
+  }
+}

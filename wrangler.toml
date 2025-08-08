@@ -1,0 +1,18 @@
+﻿name = "duckfolio"
+main = "worker.js"
+compatibility_date = "2025-08-07"
+
+[assets]
+directory = "./site/out"
+
+[[kv_namespaces]]
+binding = "DUCKFOLIO_CONFIG"
+id = "REPLACE_WITH_NAMESPACE_ID"
+
+[vars]
+SITE_NAME = "My Duckfolio"
+SITE_TITLE = "Your Name"
+AVATAR_URL = "https://example.com/avatar.png"
+LINK_GITHUB = "https://github.com/your"
+LINK_X = "https://x.com/your"
+LINK_EMAIL = "mailto:you@example.com"
