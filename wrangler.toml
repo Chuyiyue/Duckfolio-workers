@@ -2,12 +2,17 @@
 main = "worker.js"
 compatibility_date = "2025-08-07"
 
+[build]
+command = "npm --prefix site install --silent && npm --prefix site run build"
+watch_dir = "site"
+
 [assets]
 directory = "./site/out"
 
 [[kv_namespaces]]
 binding = "DUCKFOLIO_CONFIG"
 id = "REPLACE_WITH_NAMESPACE_ID"
+preview_id = "local-preview-id"
 
 [vars]
 SITE_NAME = "My Duckfolio"
